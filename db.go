@@ -1,4 +1,4 @@
-package postgres
+package main
 
 import (
 	"github.com/google/uuid"
@@ -6,9 +6,11 @@ import (
 )
 
 type User struct {
-	ID          uuid.UUID `db:"id"`
-	Title       string    `db:"title"`
-	Description string    `db:"description"`
+	ID        uuid.UUID `db:"id"`
+	Title     string    `db:"title"`
+	FirstName string    `db:"firstname"`
+	LastName  string    `db:"lastname"`
+	UserName  string    `db:"username"`
 }
 
 type Tag struct {
@@ -22,14 +24,14 @@ type Category struct {
 }
 
 type Entry struct {
-	ID         uuid.UUID  `db:"id"`
-	CreatedBy  User       `db:"createdBy"`
-	Value      float32    `db:"value"`
-	Users      []User     `db:"users"`
-	Split      []float32  `db:"split"`
-	Tags       []Tag      `db:"tags"`
-	Categories []Category `db:"categories"`
-	Date       time.Time  `db:"date"`
+	ID         uuid.UUID `db:"id"`
+	CreatedBy  User      `db:"createdBy"`
+	Value      float32   `db:"value"`
+	Users      []User    `db:"users"`
+	Split      []float32 `db:"split"`
+	Tags       []Tag     `db:"tags"`
+	Categories Category  `db:"categories"`
+	Date       time.Time `db:"date"`
 }
 
 type EntryStore interface {
@@ -53,8 +55,16 @@ type UserStore interface {
 
 type TagStore interface {
 	Tag(id uuid.UUID) (Tag, error)
-	Tags() ([]Tags, error)
+	Tags() ([]Tag, error)
 	CreateTag(tag *Tag) error
 	UpdateTag(tag *Tag) error
 	DeleteTag(id uuid.UUID) error
+}
+
+type CategoryStore interface {
+	Category(id uuid.UUID) (Category, error)
+	Categories() ([]Category, error)
+	CreateCategory(tag *Category) error
+	UpdateCategory(tag *Category) error
+	DeleteCategory(id uuid.UUID) error
 }
