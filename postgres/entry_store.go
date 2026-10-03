@@ -75,7 +75,7 @@ func (s *EntryStore) CreateEntry(entry *db.Entry) error {
 }
 
 func (s *EntryStore) UpdateEntry(entry *db.Entry) error {
-	if err := s.Get(entry, `UPDATE entries SET createdBy=$2, value=$3, users=$4, split=$5, tags=$6, categories=$7, date=$8) WHERE id=$1`,
+	if err := s.Get(entry, `UPDATE entries SET created_by=$2, value=$3, users=$4, split=$5, tags=$6, categories=$7, date=$8) WHERE id=$1`,
 		entry.ID,
 		entry.CreatedBy,
 		entry.Value,

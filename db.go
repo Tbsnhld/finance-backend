@@ -8,9 +8,9 @@ import (
 type User struct {
 	ID        uuid.UUID `db:"id"`
 	Title     string    `db:"title"`
-	FirstName string    `db:"firstname"`
-	LastName  string    `db:"lastname"`
-	UserName  string    `db:"username"`
+	FirstName string    `db:"first_name"`
+	LastName  string    `db:"last_name"`
+	UserName  string    `db:"user_name"`
 }
 
 type Tag struct {
@@ -24,14 +24,14 @@ type Category struct {
 }
 
 type Entry struct {
-	ID         uuid.UUID `db:"id"`
-	CreatedBy  User      `db:"createdBy"`
-	Value      float32   `db:"value"`
-	Users      []User    `db:"users"`
-	Split      []float32 `db:"split"`
-	Tags       []Tag     `db:"tags"`
-	Categories Category  `db:"categories"`
-	Date       time.Time `db:"date"`
+	ID         uuid.UUID   `db:"id"`
+	CreatedBy  uuid.UUID   `db:"created_by"`
+	Value      float32     `db:"value"`
+	Users      []uuid.UUID `db:"users"`
+	Split      []float32   `db:"split"`
+	Tags       []uuid.UUID `db:"tags"`
+	Categories uuid.UUID   `db:"categories"`
+	Date       time.Time   `db:"date"`
 }
 
 type EntryStore interface {
@@ -67,4 +67,11 @@ type CategoryStore interface {
 	CreateCategory(tag *Category) error
 	UpdateCategory(tag *Category) error
 	DeleteCategory(id uuid.UUID) error
+}
+
+type Store interface {
+	EntryStore
+	UserStore
+	TagStore
+	CategoryStore
 }

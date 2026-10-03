@@ -47,7 +47,7 @@ func (s *UserStore) CreateUser(user *db.User) error {
 }
 
 func (s *UserStore) UpdateUser(user *db.User) error {
-	if err := s.Get(user, `UPDATE user SET firstName=$2, lastName=$3, userName=$4, title=$5 ) WHERE id=$1`,
+	if err := s.Get(user, `UPDATE users SET first_name=$2, last_name=$3, user_name=$4, title=$5 ) WHERE id=$1`,
 		user.ID,
 		user.FirstName,
 		user.LastName,
