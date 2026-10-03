@@ -6,9 +6,11 @@ import (
 )
 
 type User struct {
-	ID          uuid.UUID `db:"id"`
-	Title       string    `db:"title"`
-	Description string    `db:"description"`
+	ID        uuid.UUID `db:"id"`
+	Title     string    `db:"title"`
+	FirstName string    `db:"firstname"`
+	LastName  string    `db:"lastname"`
+	UserName  string    `db:"username"`
 }
 
 type Tag struct {
