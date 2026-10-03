@@ -27,8 +27,8 @@ func (s *UserStore) User(id uuid.UUID) (db.User, error) {
 
 func (s *UserStore) Users() ([]db.User, error) {
 	var users []db.User
-	if err := s.Select(&users, `SELECT * FROM entries`); err != nil {
-		return []db.User{}, fmt.Errorf("error getting threads: %w", err)
+	if err := s.Select(&users, `SELECT * FROM users`); err != nil {
+		return []db.User{}, fmt.Errorf("error getting users: %w", err)
 	}
 	return users, nil
 }
